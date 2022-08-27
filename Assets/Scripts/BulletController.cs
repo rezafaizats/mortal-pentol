@@ -32,6 +32,7 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         other.GetComponent<PlayerController>().SetDamage(pentolDamage);
+        Destroy(this);
     }
 
     public void InitBullet(Vector2 direction) {

@@ -48,6 +48,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -72,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c04b58362bce5104f92c2d1919a9155c, type: 3}
-  m_Color: {r: 0.9811321, g: 0.5285084, b: 0.4026344, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 82114642e6d86ce4983ac39dc329e479, type: 3}
+  m_Color: {r: 0.9056604, g: 0.70002455, b: 0.6194375, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +101,7 @@ MonoBehaviour:
   pentolForce: 0
   pentolLifetime: 0
   pentolDirection: {x: 0, y: 0}
+  pentolCost: 0
 --- !u!50 &7909030662696041998
 Rigidbody2D:
   serializedVersion: 4
