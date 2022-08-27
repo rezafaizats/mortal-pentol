@@ -208,7 +208,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96.6
+  m_fontSize: 96.65
   m_fontSizeBase: 38.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -612,9 +612,11 @@ MonoBehaviour:
   characterHealth: 100
   pentolAmmoCollected: 0
   sprayPentolAmount: 5
-  bulletSpawnPosition: {fileID: 0}
-  normalPentolBulletPrefabs: {fileID: 0}
-  heavyPentolBulletPrefabs: {fileID: 0}
+  bulletSpawnPosition: {fileID: 1195619143}
+  normalPentolBulletPrefabs: {fileID: 7909030662696041999, guid: 0a85e3d91b8028c4fad03849b39c7706,
+    type: 3}
+  heavyPentolBulletPrefabs: {fileID: 7909030662696041999, guid: 77e381fe58a587bb79174f1941ce76f6,
+    type: 3}
 --- !u!1 &115774059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9569235, b: 0.43921566, a: 1}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1629,7 +1631,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: a350c6a6bbe62f643bfc73729f418d63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4117647}
   m_FlipX: 0
@@ -1764,7 +1766,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2103,8 +2105,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2427,7 +2429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43867922, g: 0.5421515, b: 1, a: 1}
+  m_Color: {r: 0.43921566, g: 1, b: 0.6651625, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3214,9 +3216,11 @@ MonoBehaviour:
   characterHealth: 100
   pentolAmmoCollected: 0
   sprayPentolAmount: 5
-  bulletSpawnPosition: {fileID: 0}
-  normalPentolBulletPrefabs: {fileID: 0}
-  heavyPentolBulletPrefabs: {fileID: 0}
+  bulletSpawnPosition: {fileID: 219298511}
+  normalPentolBulletPrefabs: {fileID: 7909030662696041999, guid: 0a85e3d91b8028c4fad03849b39c7706,
+    type: 3}
+  heavyPentolBulletPrefabs: {fileID: 7909030662696041999, guid: 77e381fe58a587bb79174f1941ce76f6,
+    type: 3}
 --- !u!61 &1521771544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3278,6 +3282,7 @@ Transform:
   - {fileID: 354640985}
   - {fileID: 973210541}
   - {fileID: 219298511}
+  - {fileID: 1870657912}
   - {fileID: 619025680}
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -3328,8 +3333,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1722020264}
   - component: {fileID: 1722020263}
-  - component: {fileID: 1722020265}
   - component: {fileID: 1722020266}
+  - component: {fileID: 1722020265}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -3353,6 +3358,8 @@ MonoBehaviour:
   player2HealthBar: {fileID: 259384004}
   player1Ammo: {fileID: 665313737}
   player2Ammo: {fileID: 2055556673}
+  player1Indicator: {fileID: 962087594}
+  player2Indicator: {fileID: 310010952}
 --- !u!4 &1722020264
 Transform:
   m_ObjectHideFlags: 0
@@ -3463,14 +3470,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &1722020266
-AudioListener:
+--- !u!114 &1722020266
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722020262}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca9f5556d6b77346885953b32444913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pentolAmmo: {fileID: 4568566619578729892, guid: b5986a54972e10067af3703516efb027,
+    type: 3}
+  spawnInterval: 0.35
+  players:
+  - {fileID: 96952543}
+  - {fileID: 1521771543}
 --- !u!1 &1758530293
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,6 +3624,131 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1870657911
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1521771546}
+    m_Modifications:
+    - target: {fileID: 7909030662696041993, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041993, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5408592
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041998, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041999, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: pentolForce
+      value: 375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041999, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: pentolDirection.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696041999, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: pentolDirection.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696042002, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_Name
+      value: HeavyPentolBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696042002, guid: 77e381fe58a587bb79174f1941ce76f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77e381fe58a587bb79174f1941ce76f6, type: 3}
+--- !u!4 &1870657912 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7909030662696041997, guid: 77e381fe58a587bb79174f1941ce76f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870657911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913305227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3882,8 +4024,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4018,8 +4160,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4143,7 +4285,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4230,7 +4372,7 @@ PrefabInstance:
     - target: {fileID: 7909030662696041997, guid: 0a85e3d91b8028c4fad03849b39c7706,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7909030662696041997, guid: 0a85e3d91b8028c4fad03849b39c7706,
         type: 3}
@@ -4316,6 +4458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PentolBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909030662696042002, guid: 0a85e3d91b8028c4fad03849b39c7706,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a85e3d91b8028c4fad03849b39c7706, type: 3}

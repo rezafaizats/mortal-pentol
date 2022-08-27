@@ -20,11 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int pentolAmmoCollected = 0;
     [SerializeField] private int sprayPentolAmount = 5;
     private bool isStunned;
+    private PentolType currentBulletType = PentolType.NORMAL;
 
     [Header("Bullet Options")]
     [SerializeField] private Transform bulletSpawnPosition;
     [SerializeField] private BulletController normalPentolBulletPrefabs;
-    [SerializeField] private GameObject heavyPentolBulletPrefabs;
+    [SerializeField] private BulletController heavyPentolBulletPrefabs;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +39,56 @@ public class PlayerController : MonoBehaviour
     {
         if(isStunned)
             return;
+
+        if(Input.GetKeyDown(KeyCode.Alpha1) && playerStatus== PlayerType.PLAYER_ONE){
+            currentBulletType = PentolType.NORMAL;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2) && playerStatus== PlayerType.PLAYER_ONE){
+            currentBulletType = PentolType.SPRAY;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha3) && playerStatus== PlayerType.PLAYER_ONE){
+            currentBulletType = PentolType.HEAVY;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad1) && playerStatus== PlayerType.PLAYER_TWO){
+            currentBulletType = PentolType.NORMAL;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad2) && playerStatus== PlayerType.PLAYER_TWO){
+            currentBulletType = PentolType.SPRAY;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad3) && playerStatus== PlayerType.PLAYER_TWO){
+            currentBulletType = PentolType.HEAVY;
+            GameUIHandler.Instance.SwitchBulletUI(playerStatus, (int)currentBulletType);
+        }
         
-        movementDir = new Vector2(Input.GetAxis(horizontalAxisInput), Input.GetAxis(verticalAxisInput));
+        movementDir = new Vector2(Input.GetAxis(horizontalAxisInput), 0f);
+
+        if(Input.GetKeyDown(KeyCode.W) && playerStatus == PlayerType.PLAYER_ONE) {
+            if(currentBulletType == PentolType.NORMAL)
+                ShootPentol();
+            else if(currentBulletType == PentolType.SPRAY)
+                StartCoroutine(SprayPentol(sprayPentolAmount, 0.25f));
+            else if(currentBulletType == PentolType.HEAVY)
+                ShootHeavyPentol();
+        }
+
+        if(Input.GetKeyDown(KeyCode.UpArrow) && playerStatus == PlayerType.PLAYER_TWO) {
+            if(currentBulletType == PentolType.NORMAL)
+                ShootPentol();
+            else if(currentBulletType == PentolType.SPRAY)
+                StartCoroutine(SprayPentol(sprayPentolAmount, 0.25f));
+            else if(currentBulletType == PentolType.HEAVY)
+                ShootHeavyPentol();
+        }
     }
 
     void FixedUpdate() {
@@ -63,40 +112,64 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ShootPentol() {
-        var bullet = Instantiate(normalPentolBulletPrefabs, bulletSpawnPosition.position, Quaternion.identity);
+
+        if(pentolAmmoCollected <= 0)
+            return;
+
+        var bullet = Instantiate(normalPentolBulletPrefabs.gameObject, bulletSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
         
         if(playerStatus == PlayerType.PLAYER_ONE)
-            bullet.GetComponent<BulletController>().InitBullet(new Vector2(1, 1));
+            bullet.InitBullet(new Vector2(1, 1));
         else
-            bullet.GetComponent<BulletController>().InitBullet(new Vector2(-1, 1));
+            bullet.InitBullet(new Vector2(-1, 1));
+
+        pentolAmmoCollected -= bullet.GetPentolCost();
     }
 
     IEnumerator SprayPentol(int sprayAmount, float sprayInterval) {
+
+        if(pentolAmmoCollected <= 5)
+            yield return null;
+
+        pentolAmmoCollected -= 5;
+
         for (int i = 0; i < sprayAmount; i++)
         {                
-            var bullet = Instantiate(normalPentolBulletPrefabs, bulletSpawnPosition.position, Quaternion.identity);
+            var bullet = Instantiate(normalPentolBulletPrefabs.gameObject, bulletSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
             
             if(playerStatus == PlayerType.PLAYER_ONE)
-                bullet.GetComponent<BulletController>().InitBullet(new Vector2(1, 1));
+                bullet.InitBullet(new Vector2(1, 1));
             else
-                bullet.GetComponent<BulletController>().InitBullet(new Vector2(-1, 1));
+                bullet.InitBullet(new Vector2(-1, 1));
             
             yield return new WaitForSeconds(sprayInterval);
         }
+
     }
 
     public void ShootHeavyPentol() {
-        var bullet = Instantiate(heavyPentolBulletPrefabs, bulletSpawnPosition.position, Quaternion.identity);
+
+        if(pentolAmmoCollected <= 10)
+            return;
+
+        var bullet = Instantiate(heavyPentolBulletPrefabs.gameObject, bulletSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
         
         if(playerStatus == PlayerType.PLAYER_ONE)
-            bullet.GetComponent<BulletController>().InitBullet(new Vector2(1, 1));
+            bullet.InitBullet(new Vector2(1, 1));
         else
-            bullet.GetComponent<BulletController>().InitBullet(new Vector2(-1, 1));
+            bullet.InitBullet(new Vector2(-1, 1));
+
+        pentolAmmoCollected -= bullet.GetPentolCost();
+    }
+
+    public void StunPlayer() {
+        isStunned = true;
     }
 
     public void StunPlayer(float duration) {
         isStunned = true;
 
+        StartCoroutine(UnstunCharacter(duration));
     }
 
     IEnumerator UnstunCharacter(float duration) {
@@ -108,6 +181,11 @@ public class PlayerController : MonoBehaviour
         characterHealth -= damage;
         float healthConverted = characterHealth / 100f;
         GameUIHandler.Instance.SetPlayerHealthBar(playerStatus, healthConverted);
+    }
+
+    public void AddPentolAmmo(int amount) {
+        pentolAmmoCollected += amount;
+        GameUIHandler.Instance.UpdatePlayerAmmo(playerStatus, pentolAmmoCollected);
     }
 
 }

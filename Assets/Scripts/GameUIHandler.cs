@@ -21,16 +21,16 @@ public class GameUIHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player1Ammo;
     [SerializeField] private TextMeshProUGUI player2Ammo;
 
+    [SerializeField] private PlayerIndicator player1Indicator;
+    [SerializeField] private PlayerIndicator player2Indicator;
+
+
     private void Awake() {
         
-        Instance = this;
-        
-        if(Instance != null || Instance != this)
+        if(Instance != null && Instance != this)
             Destroy(this);
         else
             Instance = this;
-
-        Debug.Log($"{Instance}");
     }
 
     // Start is called before the first frame update
@@ -50,11 +50,17 @@ public class GameUIHandler : MonoBehaviour
             DOTween.Init();
             player1HealthBar.DOValue(healthAmount, 0.2f);
             player1HealthBar.transform.DOShakePosition(0.5f, 10f, 25, 90);
+
+            if(player1HealthBar.value <= 0)
+                GameHandler.Instance.GameOver(PlayerType.PLAYER_ONE);
         }
         if(player == PlayerType.PLAYER_TWO) {
             DOTween.Init();
-            player1HealthBar.DOValue(healthAmount, 0.2f);
-            player1HealthBar.transform.DOShakePosition(0.5f, 10f, 25, 90);
+            player2HealthBar.DOValue(healthAmount, 0.2f);
+            player2HealthBar.transform.DOShakePosition(0.5f, 10f, 25, 90);
+            
+            if(player2HealthBar.value <= 0)
+                GameHandler.Instance.GameOver(PlayerType.PLAYER_TWO);
         }
     }
 
@@ -64,6 +70,15 @@ public class GameUIHandler : MonoBehaviour
         }
         if(player == PlayerType.PLAYER_TWO) {
             player2Ammo.text = amount.ToString();
+        }
+    }
+
+    public void SwitchBulletUI(PlayerType player, int ammoType) {
+        if(player == PlayerType.PLAYER_ONE) {
+            player1Indicator.SwitchPanel(ammoType);
+        }
+        if(player == PlayerType.PLAYER_TWO) {
+            player2Indicator.SwitchPanel(ammoType);
         }
     }
 
