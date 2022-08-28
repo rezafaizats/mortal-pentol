@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BulletController normalPentolBulletPrefabs;
     [SerializeField] private BulletController heavyPentolBulletPrefabs;
 
+    [Header("Player Animation")]
+    [SerializeField] private Animator playerAnim;
+    [SerializeField] private string hurtAnimString;
+    [SerializeField] private string stunnedAnimString;
+
     // Start is called before the first frame update
     void Start()
     {

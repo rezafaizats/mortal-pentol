@@ -55,6 +55,7 @@ public class GameHandler : MonoBehaviour
         {
             player.StunPlayer();
         }
+        GameUIHandler.Instance.PlayFinishHim();
     }
 
 }

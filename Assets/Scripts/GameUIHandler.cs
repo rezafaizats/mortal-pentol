@@ -24,7 +24,7 @@ public class GameUIHandler : MonoBehaviour
     [SerializeField] private PlayerIndicator player1Indicator;
     [SerializeField] private PlayerIndicator player2Indicator;
 
-
+    [SerializeField] private Image finishHim;
     private void Awake() {
         
         if(Instance != null && Instance != this)
@@ -80,6 +80,15 @@ public class GameUIHandler : MonoBehaviour
         if(player == PlayerType.PLAYER_TWO) {
             player2Indicator.SwitchPanel(ammoType);
         }
+    }
+
+    public void PlayFinishHim() {
+        finishHim.gameObject.SetActive(true);
+        finishHim.transform.DOScale(Vector3.one * 2, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    public void DisableFinishHim() {
+        finishHim.gameObject.SetActive(false);
     }
 
 }
